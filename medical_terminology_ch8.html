@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical Terminology — Chapter 8</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+  :root {
+    --rose:   #9D174D; --rose-lt: #FCE7F3; --rose-dk: #500724;
+    --violet: #6D28D9; --violet-lt:#EDE9FE; --violet-dk:#2E1065;
+    --teal:   #0E7490; --teal-lt: #CFFAFE; --teal-dk: #083344;
+    --amber:  #B45309; --amber-lt:#FEF3C7; --amber-dk:#451A03;
+    --green:  #166534; --green-lt:#DCFCE7; --green-dk:#052E16;
+    --blue:   #1D4ED8; --blue-lt: #DBEAFE; --blue-dk: #1E3A8A;
+    --coral:  #C2410C; --coral-lt:#FFEDD5; --coral-dk:#431407;
+    --slate:  #334155; --slate-lt:#F1F5F9; --slate-dk:#0F172A;
+    --gray-50:#F9FAFB; --gray-100:#F3F4F6; --gray-200:#E5E7EB;
+    --gray-400:#9CA3AF; --gray-600:#4B5563; --gray-700:#374151; --black:#111827;
+    --font:'DM Sans',sans-serif; --mono:'DM Mono',monospace;
+    --radius:10px; --radius-sm:6px;
+  }
+  body { font-family:var(--font); background:var(--gray-50); color:var(--black); }
+  .module { max-width:860px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  .module-header { background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius); padding:1.75rem 2rem; margin-bottom:1.5rem; display:flex; gap:1.5rem; align-items:flex-start; }
+  .header-icon { width:52px; height:52px; border-radius:var(--radius-sm); background:var(--rose-lt); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .header-icon svg { width:28px; height:28px; stroke:var(--rose); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .header-text h1 { font-size:20px; font-weight:600; }
+  .header-text p { font-size:13px; color:var(--gray-400); margin-top:3px; }
+  .progress-wrap { margin-top:14px; display:flex; align-items:center; gap:10px; }
+  .progress-bg { flex:1; height:5px; background:var(--gray-200); border-radius:3px; overflow:hidden; }
+  .progress-fill { height:100%; background:var(--rose); border-radius:3px; transition:width 0.5s; width:0%; }
+  .progress-label { font-size:12px; color:var(--gray-400); white-space:nowrap; }
+  .nav-row { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:1.5rem; }
+  .tab { padding:7px 16px; font-size:13px; font-family:var(--font); font-weight:500; border:1px solid var(--gray-200); border-radius:100px; background:#fff; color:var(--gray-600); cursor:pointer; transition:all 0.15s; }
+  .tab:hover { border-color:var(--rose); color:var(--rose); }
+  .tab.active { background:var(--rose); border-color:var(--rose); color:#fff; }
+  .section { display:none; }
+  .section.active { display:block; animation:fadeIn 0.2s ease; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+  .card { background:#fff; border:1px solid var(--gray-200); border-radius:var(--radius); padding:1.25rem 1.5rem; margin-bottom:1rem; }
+  .card-title { font-size:14px; font-weight:600; display:flex; align-items:center; gap:7px; margin-bottom:12px; }
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; }
+  @media(max-width:620px){ .two-col,.three-col{grid-template-columns:1fr} }
+  .badge { font-size:11px; font-weight:600; padding:2px 8px; border-radius:20px; }
+  .badge-rose   { background:var(--rose-lt);   color:var(--rose-dk); }
+  .badge-violet { background:var(--violet-lt); color:var(--violet-dk); }
+  .badge-teal   { background:var(--teal-lt);   color:var(--teal-dk); }
+  .badge-amber  { background:var(--amber-lt);  color:var(--amber-dk); }
+  .badge-green  { background:var(--green-lt);  color:var(--green-dk); }
+  .badge-blue   { background:var(--blue-lt);   color:var(--blue-dk); }
+  .badge-coral  { background:var(--coral-lt);  color:var(--coral-dk); }
+  .badge-slate  { background:var(--slate-lt);  color:var(--slate-dk); }
+  .chip { display:inline-block; font-family:var(--mono); font-size:12px; padding:1px 7px; border-radius:4px; background:var(--gray-100); color:var(--black); border:1px solid var(--gray-200); }
+  .tip { border-radius:var(--radius-sm); padding:10px 14px; font-size:13px; line-height:1.6; margin-top:10px; }
+  .tip.rose   { background:var(--rose-lt);   color:var(--rose-dk);   border-left:3px solid var(--rose); }
+  .tip.violet { background:var(--violet-lt); color:var(--violet-dk); border-left:3px solid var(--violet); }
+  .tip.teal   { background:var(--teal-lt);   color:var(--teal-dk);   border-left:3px solid var(--teal); }
+  .tip.amber  { background:var(--amber-lt);  color:var(--amber-dk);  border-left:3px solid var(--amber); }
+  .tip.green  { background:var(--green-lt);  color:var(--green-dk);  border-left:3px solid var(--green); }
+  .tip.blue   { background:var(--blue-lt);   color:var(--blue-dk);   border-left:3px solid var(--blue); }
+  .vs-item { border:1px solid var(--gray-200); border-radius:var(--radius-sm); padding:10px 12px; }
+  .vs-head { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px; }
+  .vs-body { font-size:13px; color:var(--gray-600); line-height:1.5; }
+  .path-row { display:flex; gap:12px; align-items:flex-start; padding:9px 0; border-bottom:1px solid var(--gray-200); }
+  .path-row:last-child { border-bottom:none; }
+  .path-num { width:28px; height:28px; border-radius:50%; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+  .path-name { font-size:13.5px; font-weight:600; color:var(--black); }
+  .path-cf { font-family:var(--mono); font-size:11px; color:var(--rose); background:var(--rose-lt); padding:1px 5px; border-radius:3px; margin-left:5px; }
+  .path-desc { font-size:12.5px; color:var(--gray-600); margin-top:2px; line-height:1.4; }
+  .pitem { display:flex; gap:10px; align-items:flex-start; padding:9px 0; border-bottom:1px solid var(--gray-200); }
+  .pitem:last-child { border-bottom:none; padding-bottom:0; }
+  .pitem:first-child { padding-top:0; }
+  .pname { font-size:13.5px; font-weight:600; color:var(--black); }
+  .pdef  { font-size:12.5px; color:var(--gray-600); margin-top:2px; line-height:1.4; }
+  .sub-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:1rem; }
+  .sub-tab { padding:5px 13px; font-size:12px; font-family:var(--font); font-weight:500; border:1px solid var(--gray-200); border-radius:100px; background:#fff; color:var(--gray-600); cursor:pointer; transition:all 0.15s; }
+  .sub-tab:hover { border-color:var(--rose); color:var(--rose); }
+  .sub-tab.active { background:var(--rose); border-color:var(--rose); color:#fff; }
+  .vpanel { display:none; }
+  .vpanel.active { display:block; }
+  .vtable { width:100%; border-collapse:collapse; font-size:13px; }
+  .vtable th { text-align:left; padding:8px 10px; color:var(--gray-400); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; border-bottom:1px solid var(--gray-200); }
+  .vtable td { padding:8px 10px; border-bottom:1px solid var(--gray-100); color:var(--black); vertical-align:top; }
+  .vtable tr:last-child td { border-bottom:none; }
+  .vtable tr:hover td { background:var(--gray-50); }
+  .vtable code { font-family:var(--mono); font-size:12px; color:var(--rose-dk); background:var(--rose-lt); padding:1px 6px; border-radius:3px; }
+  .fc-nav { display:flex; align-items:center; gap:12px; margin-bottom:1rem; }
+  .fc-counter { font-size:13px; color:var(--gray-400); flex:1; text-align:center; }
+  .fc-btn { width:36px; height:36px; border:1px solid var(--gray-200); border-radius:50%; background:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--gray-600); font-size:16px; transition:all 0.15s; }
+  .fc-btn:hover { border-color:var(--rose); color:var(--rose); }
+  .flip-wrap { perspective:1000px; height:160px; cursor:pointer; user-select:none; }
+  .flip-inner { width:100%; height:100%; position:relative; transform-style:preserve-3d; transition:transform 0.5s cubic-bezier(.4,0,.2,1); }
+  .flip-inner.flipped { transform:rotateY(180deg); }
+  .flip-front,.flip-back { position:absolute; inset:0; backface-visibility:hidden; border-radius:var(--radius); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.5rem; text-align:center; border:1px solid var(--gray-200); }
+  .flip-front { background:#fff; }
+  .flip-back  { background:var(--rose-lt); border-color:#F9A8D4; transform:rotateY(180deg); }
+  .flip-term { font-size:24px; font-weight:600; color:var(--black); font-family:var(--mono); }
+  .flip-hint { font-size:11px; color:var(--gray-400); margin-top:6px; text-transform:uppercase; letter-spacing:0.06em; }
+  .flip-def  { font-size:16px; font-weight:600; color:var(--rose-dk); }
+  .flip-ex   { font-size:12px; color:var(--rose); margin-top:6px; font-family:var(--mono); }
+  .fc-shuffle { padding:6px 14px; font-size:12px; font-family:var(--font); border:1px solid var(--gray-200); border-radius:100px; background:#fff; color:var(--gray-600); cursor:pointer; margin-left:auto; display:block; margin-bottom:10px; transition:all 0.15s; }
+  .fc-shuffle:hover { border-color:var(--rose); color:var(--rose); }
+  .quiz-progress { display:flex; gap:4px; flex-wrap:wrap; margin-bottom:1.25rem; }
+  .q-dot { width:10px; height:10px; border-radius:50%; background:var(--gray-200); }
+  .q-dot.pass { background:var(--teal); }
+  .q-dot.fail { background:#E24B4A; }
+  .quiz-q-text { font-size:16px; font-weight:600; margin-bottom:1rem; line-height:1.5; }
+  .quiz-opts { display:flex; flex-direction:column; gap:8px; margin-bottom:1rem; }
+  .q-opt { padding:11px 16px; border:1px solid var(--gray-200); border-radius:var(--radius-sm); background:#fff; font-size:14px; font-family:var(--font); cursor:pointer; text-align:left; transition:all 0.15s; }
+  .q-opt:hover:not(:disabled) { border-color:var(--rose); background:var(--rose-lt); }
+  .q-opt.correct { background:var(--teal-lt); border-color:var(--teal); color:var(--teal-dk); font-weight:500; }
+  .q-opt.wrong   { background:#FCEBEB; border-color:#E24B4A; color:#501313; }
+  .q-fb { font-size:13px; padding:9px 14px; border-radius:var(--radius-sm); margin-bottom:1rem; }
+  .q-fb.correct { background:var(--teal-lt); color:var(--teal-dk); }
+  .q-fb.wrong   { background:#FCEBEB; color:#501313; }
+  .quiz-next { padding:9px 20px; font-size:13px; font-family:var(--font); font-weight:500; border:1px solid var(--gray-200); border-radius:100px; background:#fff; cursor:pointer; }
+  .score-wrap { text-align:center; padding:2rem 0 1rem; }
+  .score-big { font-size:52px; font-weight:700; line-height:1; }
+  .score-big.great { color:var(--teal); }
+  .score-big.ok    { color:var(--amber); }
+  .score-big.retry { color:#E24B4A; }
+  .score-msg { font-size:15px; color:var(--gray-600); margin-top:8px; margin-bottom:1.5rem; }
+  .retry-btn { padding:10px 24px; font-size:14px; font-family:var(--font); font-weight:500; border:1px solid var(--rose); border-radius:100px; background:var(--rose-lt); color:var(--rose-dk); cursor:pointer; transition:all 0.15s; }
+  .retry-btn:hover { background:var(--rose); color:#fff; }
+</style>
+</head>
+<body>
+<div class="module">
+
+  <div class="module-header">
+    <div class="header-icon">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+    </div>
+    <div style="flex:1">
+      <div class="header-text">
+        <h1>Medical Terminology — Chapter 8</h1>
+        <p>Female Reproductive System &nbsp;·&nbsp; 8 sections &nbsp;·&nbsp; 26 flashcards &nbsp;·&nbsp; 12-question quiz</p>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-bg"><div class="progress-fill" id="prog-fill"></div></div>
+        <div class="progress-label" id="prog-label">0%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-row" role="tablist">
+    <button class="tab active" onclick="showSec('overview',this)">Overview</button>
+    <button class="tab" onclick="showSec('anatomy',this)">Anatomy</button>
+    <button class="tab" onclick="showSec('cycle',this)">Menstrual cycle</button>
+    <button class="tab" onclick="showSec('obstetrics',this)">Obstetrics</button>
+    <button class="tab" onclick="showSec('pathology',this)">Pathology</button>
+    <button class="tab" onclick="showSec('procedures',this)">Procedures</button>
+    <button class="tab" onclick="showSec('vocab',this)">Vocabulary</button>
+    <button class="tab" onclick="showSec('flashcards',this)">Flashcards</button>
+    <button class="tab" onclick="showSec('quiz',this)">Quiz</button>
+  </div>
+
+  <!-- ===== OVERVIEW ===== -->
+  <div class="section active" id="sec-overview">
+    <div class="card">
+      <div class="card-title" style="color:var(--rose)">Functions &amp; Specialists</div>
+      <div class="three-col">
+        <div class="vs-item"><div class="vs-head" style="color:var(--rose)">Ovum production</div><div class="vs-body">Ovaries produce ova (eggs) from menarche to menopause</div></div>
+        <div class="vs-item"><div class="vs-head" style="color:var(--violet)">Hormone production</div><div class="vs-body">Estrogen and progesterone regulate cycle and pregnancy</div></div>
+        <div class="vs-item"><div class="vs-head" style="color:var(--teal)">Fertilization support</div><div class="vs-body">Provide environment for fertilization of ovum by sperm</div></div>
+        <div class="vs-item"><div class="vs-head" style="color:var(--amber)">Gestation</div><div class="vs-body">Nourish and protect developing fetus through pregnancy</div></div>
+        <div class="vs-item"><div class="vs-head" style="color:var(--green)">Parturition</div><div class="vs-body">Deliver the neonate (newborn) through childbirth</div></div>
+        <div class="vs-item"><div class="vs-head" style="color:var(--blue)">Lactation</div><div class="vs-body">Mammary glands produce breast milk for the neonate</div></div>
+      </div>
+      <div class="tip rose" style="margin-top:1rem">
+        <strong>Obstetrics</strong> → Obstetrician (pregnancy, labor, delivery, postpartum) &nbsp;|&nbsp;
+        <strong>Gynecology</strong> (gynec/o) → Gynecologist (female reproductive health) &nbsp;|&nbsp;
+        <strong>Midwife</strong> / <strong>Doula</strong> assist through labor and postpartum
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title" style="color:var(--violet)">Key Reproductive Terms</div>
+        <div style="font-size:13px;color:var(--gray-600);line-height:2.0">
+          <strong style="color:var(--black)">Menarche</strong> (men/o + -arche) — first menstrual period<br>
+          <strong style="color:var(--black)">Menopause</strong> (men/o + -pause) — cessation of menstruation<br>
+          <strong style="color:var(--black)">Ovum</strong> (ov/o) — female gamete (egg cell); pl. ova<br>
+          <strong style="color:var(--black)">Ovulation</strong> — release of ovum from ovary<br>
+          <strong style="color:var(--black)">Gestation</strong> — pregnancy; ~40 weeks from LMP<br>
+          <strong style="color:var(--black)">Parturition</strong> (part/o) — act of giving birth<br>
+          <strong style="color:var(--black)">Zygote</strong> — fertilized ovum (egg + sperm)<br>
+          <strong style="color:var(--black)">Puerperium</strong> (puerper/o) — 6-week postpartum period
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--amber)">Organs at a Glance</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span class="badge badge-rose">Ovaries (oophor/o)</span>
+          <span class="badge badge-violet">Fallopian tubes (salping/o)</span>
+          <span class="badge badge-teal">Uterus (hyster/o, metr/o)</span>
+          <span class="badge badge-amber">Cervix (cervic/o)</span>
+          <span class="badge badge-green">Vagina (vagin/o, colp/o)</span>
+          <span class="badge badge-blue">Vulva (vulv/o)</span>
+          <span class="badge badge-coral">Endometrium (endometri/o)</span>
+          <span class="badge badge-slate">Breast (mamm/o, mast/o)</span>
+          <span class="badge badge-rose">Amnion (amni/o)</span>
+          <span class="badge badge-violet">Chorion (chori/o)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ANATOMY ===== -->
+  <div class="section" id="sec-anatomy">
+    <div class="card">
+      <div class="card-title" style="color:var(--rose)">Internal Female Reproductive Anatomy</div>
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div class="path-row">
+          <div class="path-num" style="background:var(--rose-lt);color:var(--rose-dk)">1</div>
+          <div><div class="path-name">Ovaries<span class="path-cf">oophor/o, ovari/o</span></div><div class="path-desc">Paired almond-shaped female gonads in the pelvic cavity. Two functions: (1) Produce ova (oogenesis); (2) Secrete estrogen and progesterone. Contain follicles at various stages of development. Corpus luteum forms after ovulation — secretes progesterone.</div></div>
+        </div>
+        <div class="path-row">
+          <div class="path-num" style="background:var(--violet-lt);color:var(--violet-dk)">2</div>
+          <div><div class="path-name">Fallopian Tubes (Uterine Tubes)<span class="path-cf">salping/o</span></div><div class="path-desc">Two tubes (~10 cm) extending from uterus toward ovaries. Fimbriae (finger-like projections) sweep ovum into tube. Site of fertilization. Cilia and peristalsis move fertilized ovum toward uterus (~3–4 days).</div></div>
+        </div>
+        <div class="path-row">
+          <div class="path-num" style="background:var(--teal-lt);color:var(--teal-dk)">3</div>
+          <div><div class="path-name">Uterus<span class="path-cf">hyster/o, metr/o, metri/o</span></div><div class="path-desc">Hollow pear-shaped muscular organ. Three layers: <strong>Perimetrium</strong> (outer serosal layer), <strong>Myometrium</strong> (metr/o — thick muscular middle layer; contracts during labor), <strong>Endometrium</strong> (endometri/o — inner mucosal layer that sheds during menstruation / implants embryo).</div></div>
+        </div>
+        <div class="path-row">
+          <div class="path-num" style="background:var(--amber-lt);color:var(--amber-dk)">4</div>
+          <div><div class="path-name">Cervix<span class="path-cf">cervic/o</span></div><div class="path-desc">Lower narrow portion of the uterus; opens into the vagina. Contains the cervical canal and cervical os. Pap smear samples cervical cells for cancer screening. Dilates during labor (0–10 cm).</div></div>
+        </div>
+        <div class="path-row">
+          <div class="path-num" style="background:var(--green-lt);color:var(--green-dk)">5</div>
+          <div><div class="path-name">Vagina<span class="path-cf">vagin/o, colp/o</span></div><div class="path-desc">Muscular canal (~9 cm) from cervix to exterior; birth canal during delivery; receives penis during coitus. Bartholin glands provide lubrication. Hymen = thin membrane partially covering vaginal opening.</div></div>
+        </div>
+        <div class="path-row" style="border-bottom:none">
+          <div class="path-num" style="background:var(--blue-lt);color:var(--blue-dk)">6</div>
+          <div><div class="path-name">Vulva &amp; External Genitalia<span class="path-cf">vulv/o, episi/o</span></div><div class="path-desc">Collective external female genitalia. Includes: <strong>Mons pubis</strong> (fatty mound), <strong>Labia majora</strong> (outer folds), <strong>Labia minora</strong> (inner folds), <strong>Clitoris</strong> (erectile tissue; sensory), <strong>Vestibule</strong> (area surrounding vaginal/urethral openings), <strong>Perineum</strong> (area between vagina and anus). Culdocentesis (culd/o) = aspiration from rectouterine pouch.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title" style="color:var(--violet)">Uterine Layers Memory Aid</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div class="vs-item"><div class="vs-head" style="color:var(--slate)">Perimetrium</div><div class="vs-body"><em>peri-</em> (around) — outermost serosal/peritoneal covering</div></div>
+          <div class="vs-item"><div class="vs-head" style="color:var(--violet)">Myometrium</div><div class="vs-body"><em>my/o + metr/o</em> — muscular middle layer; contracts during labor and menstruation</div></div>
+          <div class="vs-item"><div class="vs-head" style="color:var(--rose)">Endometrium</div><div class="vs-body"><em>endo-</em> (within) + <em>metr/o</em> — inner lining; sheds during menstruation; site of implantation</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--amber)">Breast Anatomy</div>
+        <div style="font-size:13px;color:var(--gray-600);line-height:1.9">
+          <strong style="color:var(--black)">Mammary glands (mamm/o, mast/o)</strong> — produce breast milk (lactation)<br>
+          <strong style="color:var(--black)">Areola</strong> — darkened circular area surrounding the nipple<br>
+          <strong style="color:var(--black)">Mammary papilla (thel/e)</strong> — nipple; ducts open here<br>
+          <strong style="color:var(--black)">Lobes & ducts</strong> — glandular tissue organized into 15–20 lobes; ducts carry milk to nipple
+        </div>
+        <div class="tip amber">thel/e = nipple · mamm/o = breast · mast/o = breast · Mammography (mamm/o + -graphy) = breast X-ray imaging for cancer screening</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MENSTRUAL CYCLE ===== -->
+  <div class="section" id="sec-cycle">
+    <div class="card">
+      <div class="card-title" style="color:var(--rose)">The Menstrual Cycle (~28 days)</div>
+      <div class="tip rose" style="margin-bottom:1rem">The menstrual cycle is regulated by the hypothalamus-pituitary-ovarian axis. Key hormones: <strong>FSH</strong> (follicle-stimulating hormone), <strong>LH</strong> (luteinizing hormone), <strong>Estrogen</strong>, <strong>Progesterone</strong>.</div>
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div class="path-row">
+          <div class="path-num" style="background:var(--coral-lt);color:var(--coral-dk)">1</div>
+          <div><div class="path-name">Menstrual Phase (Days 1–5)</div><div class="path-desc">Endometrium sheds (menstruation/men/o). Estrogen and progesterone drop → uterine lining sloughs off. Menstrual flow = blood + endometrial tissue. Average blood loss: ~30–80 mL.</div></div>
+        </div>
+        <div class="path-row">
+          <div class="path-num" style="background:var(--rose-lt);color:var(--rose-dk)">2</div>
+          <div><div class="path-name">Follicular Phase (Days 1–13)</div><div class="path-desc">FSH stimulates follicle development in the ovary. Rising estrogen thickens endometrium (proliferative phase). One dominant follicle develops → Graafian follicle.</div></div>
+        </div>
+        <div class="path-row">
+          <div class="path-num" style="background:var(--violet-lt);color:var(--violet-dk)">3</div>
+          <div><div class="path-name">Ovulation (Day 14)</div><div class="path-desc">LH surge triggers release of the ovum (ovulation). Ovum swept into fallopian tube by fimbriae. Fertile window: ~5 days before and 1 day after ovulation.</div></div>
+        </div>
+        <div class="path-row" style="border-bottom:none">
+          <div class="path-num" style="background:var(--amber-lt);color:var(--amber-dk)">4</div>
+          <div><div class="path-name">Luteal Phase (Days 14–28)</div><div class="path-desc">Corpus luteum (ruptured follicle) secretes progesterone → maintains endometrium for implantation. If no fertilization: corpus luteum degenerates → progesterone falls → menstruation begins. If fertilization: hCG maintains corpus luteum.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title" style="color:var(--violet)">Key Hormones</div>
+        <div style="font-size:13px;color:var(--gray-600);line-height:1.9">
+          <strong style="color:var(--black)">Estrogen</strong> — stimulates endometrial growth; secondary sex characteristics; produced by follicles and corpus luteum<br>
+          <strong style="color:var(--black)">Progesterone</strong> — maintains endometrium for implantation; produced by corpus luteum; "pro-gestation"<br>
+          <strong style="color:var(--black)">FSH</strong> — stimulates follicle development<br>
+          <strong style="color:var(--black)">LH</strong> — triggers ovulation; stimulates corpus luteum<br>
+          <strong style="color:var(--black)">hCG</strong> — human chorionic gonadotropin; produced by embryo after implantation; detected by pregnancy tests
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--amber)">Menstrual Terms — men/o</div>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <div class="vs-item"><div class="vs-head" style="color:var(--rose)">Menorrhagia</div><div class="vs-body">men/o + -rrhagia; abnormally heavy or prolonged menstrual bleeding</div></div>
+          <div class="vs-item"><div class="vs-head" style="color:var(--amber)">Metrorrhagia</div><div class="vs-body">metr/o + -rrhagia; irregular uterine bleeding between periods</div></div>
+          <div class="vs-item"><div class="vs-head" style="color:var(--violet)">Amenorrhea</div><div class="vs-body">a- + men/o + -rrhea; absence of menstruation</div></div>
+          <div class="vs-item"><div class="vs-head" style="color:var(--teal)">Dysmenorrhea</div><div class="vs-body">dys- + men/o + -rrhea; painful menstruation (cramps)</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== OBSTETRICS ===== -->
+  <div class="section" id="sec-obstetrics">
+    <div class="card">
+      <div class="card-title" style="color:var(--green)">Pregnancy — Gestation &amp; Key Terms</div>
+      <div class="two-col" style="margin-bottom:1rem">
+        <div>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);margin-bottom:8px">Pregnancy terminology</div>
+          <div style="font-size:13px;color:var(--gray-600);line-height:1.9">
+            <strong style="color:var(--black)">Gravida (-gravida)</strong> — number of pregnancies (total)<br>
+            <strong style="color:var(--black)">Para (-para)</strong> — number of deliveries after 20 weeks<br>
+            <strong style="color:var(--black)">Nullipara</strong> — nulli- + -para; never delivered<br>
+            <strong style="color:var(--black)">Primigravida</strong> — primi- + -gravida; first pregnancy<br>
+            <strong style="color:var(--black)">Multigravida</strong> — multi- + -gravida; multiple pregnancies<br>
+            <strong style="color:var(--black)">Gestation</strong> — ~40 weeks (280 days) from LMP<br>
+            <strong style="color:var(--black)">Antenatal / Prenatal</strong> — before birth (ante- / pre-)<br>
+            <strong style="color:var(--black)">Postpartum</strong> — after delivery
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);margin-bottom:8px">Fetal & placental structures</div>
+          <div style="font-size:13px;color:var(--gray-600);line-height:1.9">
+            <strong style="color:var(--black)">Zygote</strong> — fertilized ovum (sperm + egg)<br>
+            <strong style="color:var(--black)">Embryo</strong> — weeks 1–8 of development<br>
+            <strong style="color:var(--black)">Fetus</strong> — week 9 to birth<br>
+            <strong style="color:var(--black)">Placenta</strong> — organ of exchange; O₂, nutrients, waste<br>
+            <strong style="color:var(--black)">Chorion (chori/o)</strong> — outermost fetal membrane<br>
+            <strong style="color:var(--black)">Amnion (amni/o)</strong> — inner membrane; contains amniotic fluid<br>
+            <strong style="color:var(--black)">hCG</strong> — maintains corpus luteum; basis of pregnancy test<br>
+            <strong style="color:var(--black)">Meconium</strong> — first fetal stool; dark green
+          </div>
+        </div>
+      </div>
+      <div class="tip green">GTPAL notation: G = Gravida (total pregnancies) · T = Term births · P = Preterm births · A = Abortions/losses · L = Living children. Example: G3T2P0A1L2</div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--teal)">Labor &amp; Delivery Terms</div>
+      <div class="two-col">
+        <div>
+          <div class="pitem"><div><div class="pname">Parturition</div><div class="pdef">part/o; act of giving birth; labor and delivery</div></div></div>
+          <div class="pitem"><div><div class="pname">Cesarean section (CS)</div><div class="pdef">Delivery through abdominal and uterine incision; when vaginal delivery is unsafe</div></div></div>
+          <div class="pitem"><div><div class="pname">Episiotomy</div><div class="pdef">episi/o + -tomy; incision of the perineum to widen vaginal opening during delivery</div></div></div>
+          <div class="pitem"><div><div class="pname">-tocia</div><div class="pdef">Suffix meaning labor/birth condition; dystocia = difficult labor; eutocia = normal labor</div></div></div>
+        </div>
+        <div>
+          <div class="pitem"><div><div class="pname">Puerperium</div><div class="pdef">puerper/o; 6-week period following delivery during which uterus returns to pre-pregnancy size (involution)</div></div></div>
+          <div class="pitem"><div><div class="pname">Erythroblastosis fetalis</div><div class="pdef">Rh incompatibility; Rh-negative mother produces antibodies against Rh-positive fetal blood → hemolytic disease of newborn; prevented by RhoGAM</div></div></div>
+          <div class="pitem"><div><div class="pname">Oligohydramnios</div><div class="pdef">olig/o (few) + hydr/o (water) + amni/o; abnormally low amniotic fluid volume</div></div></div>
+          <div class="pitem"><div><div class="pname">Nat/o terms</div><div class="pdef">nat/o = birth; neonatal (neo- + nat/o = newborn), antenatal (ante- + nat/o = before birth), postnatal (post- + nat/o = after birth)</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PATHOLOGY ===== -->
+  <div class="section" id="sec-pathology">
+    <div class="sub-tabs" id="path-tabs">
+      <button class="sub-tab active" onclick="showPath('uterus',this)">Uterus &amp; endometrium</button>
+      <button class="sub-tab" onclick="showPath('ovary',this)">Ovaries &amp; tubes</button>
+      <button class="sub-tab" onclick="showPath('cervix',this)">Cervix &amp; vagina</button>
+      <button class="sub-tab" onclick="showPath('obstetric',this)">Obstetric disorders</button>
+      <button class="sub-tab" onclick="showPath('breast',this)">Breast disorders</button>
+    </div>
+    <div class="card">
+      <div class="vpanel active" id="pp-uterus">
+        <div class="pitem"><div><div class="pname">Endometriosis</div><div class="pdef">Endometrial tissue grows <strong>outside</strong> the uterus (ovaries, tubes, peritoneum). <em>endometri/o + -osis</em>. Responds to hormonal cycle → pain, dysmenorrhea, infertility. Treatment: hormones, laparoscopic excision.</div></div></div>
+        <div class="pitem"><div><div class="pname">Leiomyoma (fibroid)</div><div class="pdef">Benign smooth muscle tumor of the myometrium. <em>leio- (smooth) + my/o + -oma</em>. Most common benign uterine tumor. Symptoms: menorrhagia, pelvic pressure, dysmenorrhea. Treatment: UAE, myomectomy, hysterectomy.</div></div></div>
+        <div class="pitem"><div><div class="pname">Hysterosalpingography (HSG)</div><div class="pdef"><em>hyster/o + salping/o + -graphy</em>. X-ray of uterus and fallopian tubes after contrast injection; diagnoses tubal obstruction, uterine defects; used in infertility workup.</div></div></div>
+        <div class="pitem"><div><div class="pname">Hysteroptosis</div><div class="pdef">Prolapse/downward displacement of the uterus. <em>hyster/o + -ptosis (drooping)</em>. Uterus descends into vaginal canal; from weakened pelvic floor. Treatment: pessary or hysteropexy.</div></div></div>
+        <div class="pitem"><div><div class="pname">Hysteropexy</div><div class="pdef">Surgical fixation of the uterus. <em>hyster/o + -pexy</em>. Treats uterine prolapse (hysteroptosis).</div></div></div>
+        <div class="pitem"><div><div class="pname">Endometrial carcinoma</div><div class="pdef">Most common gynecologic malignancy; arises from endometrium; risk: estrogen excess, obesity, nulliparity; classic symptom = postmenopausal bleeding.</div></div></div>
+      </div>
+      <div class="vpanel" id="pp-ovary">
+        <div class="pitem"><div><div class="pname">Polycystic ovary syndrome (PCOS)</div><div class="pdef">poly- (many) + cyst + ovary; multiple small ovarian cysts from follicle arrest; most common endocrine disorder in reproductive-age females. Features: irregular periods, anovulation, hyperandrogenism, insulin resistance. Treatment: lifestyle, OCPs, metformin.</div></div></div>
+        <div class="pitem"><div><div class="pname">Ovarian cyst</div><div class="pdef">Fluid-filled sac in/on the ovary; most are functional (follicular or corpus luteum cysts) and resolve spontaneously; dermoid cysts, endometriomas may need treatment.</div></div></div>
+        <div class="pitem"><div><div class="pname">Ovarian carcinoma</div><div class="pdef">Most lethal gynecologic cancer; often detected late (silent); elevated CA-125; risk: BRCA mutation, family history. Treatment: debulking surgery + chemotherapy.</div></div></div>
+        <div class="pitem"><div><div class="pname">Salpingitis</div><div class="pdef">Inflammation of the fallopian tube. <em>salping/o + -itis</em>. Often from STI (chlamydia, gonorrhea); can cause pelvic inflammatory disease (PID) and tubal scarring → infertility, ectopic pregnancy.</div></div></div>
+        <div class="pitem"><div><div class="pname">Salpingolysis</div><div class="pdef"><em>salping/o + -lysis</em>. Surgical breaking/dissolving of fallopian tube adhesions; treats tubal obstruction from PID or endometriosis.</div></div></div>
+        <div class="pitem"><div><div class="pname">Oophorectomy</div><div class="pdef"><em>oophor/o + -ectomy</em>. Surgical removal of an ovary; for cancer, large cysts, endometriosis. Bilateral oophorectomy = surgical menopause.</div></div></div>
+        <div class="pitem"><div><div class="pname">Anovulation</div><div class="pdef">an- (without) + ovulation; failure to release an ovum; common in PCOS; leading cause of female infertility.</div></div></div>
+      </div>
+      <div class="vpanel" id="pp-cervix">
+        <div class="pitem"><div><div class="pname">Cervical dysplasia</div><div class="pdef">Abnormal cell growth in the cervix. <em>cervic/o + dys- + -plasia</em>. CIN (cervical intraepithelial neoplasia); caused primarily by HPV; detected by Pap smear; can progress to cervical carcinoma if untreated.</div></div></div>
+        <div class="pitem"><div><div class="pname">Cervical carcinoma</div><div class="pdef">Most commonly squamous cell carcinoma; almost entirely caused by HPV (types 16 & 18); preventable by HPV vaccine; detected by Pap smear + HPV co-test. Treatment: surgery, radiation, chemotherapy.</div></div></div>
+        <div class="pitem"><div><div class="pname">Cervicitis</div><div class="pdef">Inflammation of the cervix. <em>cervic/o + -itis</em>. Usually from STI (chlamydia, gonorrhea, herpes); purulent discharge, bleeding.</div></div></div>
+        <div class="pitem"><div><div class="pname">Vulvovaginitis</div><div class="pdef">Inflammation of the vulva and vagina. <em>vulv/o + vagin/o + -itis</em>. Causes: bacterial vaginosis (BV), candidiasis (yeast), Trichomonas; symptoms: discharge, itching, odor.</div></div></div>
+        <div class="pitem"><div><div class="pname">Colposcopy</div><div class="pdef"><em>colp/o + -scopy</em>. Visual examination of the vagina and cervix with a magnifying scope; performed after abnormal Pap smear; allows directed biopsy.</div></div></div>
+        <div class="pitem"><div><div class="pname">Culdocentesis</div><div class="pdef"><em>culd/o + -centesis</em>. Aspiration of fluid from the rectouterine (cul-de-sac) pouch via vaginal wall; diagnoses ectopic pregnancy rupture or PID.</div></div></div>
+      </div>
+      <div class="vpanel" id="pp-obstetric">
+        <div class="pitem"><div><div class="pname">Ectopic pregnancy</div><div class="pdef">Implantation of fertilized ovum OUTSIDE the uterus; most common in fallopian tube (tubal pregnancy). Rupture = life-threatening hemorrhage. Treatment: methotrexate or surgery.</div></div></div>
+        <div class="pitem"><div><div class="pname">Preeclampsia</div><div class="pdef">Hypertension + proteinuria + edema after 20 weeks gestation; can progress to eclampsia (seizures); requires delivery. Risk: first pregnancy, obesity, multiple gestation.</div></div></div>
+        <div class="pitem"><div><div class="pname">Placenta previa</div><div class="pdef">Placenta covers cervical os (opening); painless bright red vaginal bleeding in 3rd trimester; delivery by cesarean section.</div></div></div>
+        <div class="pitem"><div><div class="pname">Erythroblastosis fetalis</div><div class="pdef">Rh incompatibility — Rh(-) mother sensitized to Rh(+) fetal blood cells → maternal antibodies cross placenta → fetal hemolysis. Prevented by RhoGAM (Rh immunoglobulin) at 28 weeks and delivery.</div></div></div>
+        <div class="pitem"><div><div class="pname">Choriocarcinoma</div><div class="pdef"><em>chori/o + carcin/o + -oma</em>. Malignant gestational trophoblastic tumor arising from chorionic tissue; very sensitive to chemotherapy; highly curable.</div></div></div>
+        <div class="pitem"><div><div class="pname">AFP test</div><div class="pdef">Alpha-fetoprotein screening test; elevated in open neural tube defects (spina bifida); decreased in Down syndrome; part of maternal serum screening.</div></div></div>
+        <div class="pitem"><div><div class="pname">Amniocentesis</div><div class="pdef"><em>amni/o + -centesis</em>. Aspiration of amniotic fluid for genetic/chromosomal testing; performed at 15–20 weeks; diagnoses Down syndrome, genetic disorders, lung maturity.</div></div></div>
+      </div>
+      <div class="vpanel" id="pp-breast">
+        <div class="pitem"><div><div class="pname">Fibrocystic breast disease</div><div class="pdef">Most common benign breast condition; lumpy, tender breasts that worsen before menstruation; related to hormonal fluctuations; benign but may require biopsy to exclude cancer.</div></div></div>
+        <div class="pitem"><div><div class="pname">Fibroadenoma</div><div class="pdef">Most common benign breast tumor in young women; firm, smooth, mobile, non-tender mass; no malignant potential; often observed or excised.</div></div></div>
+        <div class="pitem"><div><div class="pname">Breast carcinoma</div><div class="pdef">Most common cancer in women; majority are invasive ductal carcinoma; risk factors: BRCA1/2, family history, age, estrogen exposure. Screening: mammography (mamm/o + -graphy).</div></div></div>
+        <div class="pitem"><div><div class="pname">Mastopexy</div><div class="pdef"><em>mast/o + -pexy</em>. Surgical fixation/lifting of the breast; cosmetic/reconstructive procedure.</div></div></div>
+        <div class="pitem"><div><div class="pname">Theleplasty</div><div class="pdef"><em>thel/e + -plasty</em>. Surgical repair/reconstruction of the nipple.</div></div></div>
+        <div class="pitem"><div><div class="pname">Mammography</div><div class="pdef"><em>mamm/o + -graphy</em>. X-ray imaging of breast tissue; primary screening tool for breast cancer; recommended annually from age 40–50 depending on guidelines.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PROCEDURES ===== -->
+  <div class="section" id="sec-procedures">
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title" style="color:var(--teal)">Diagnostic Procedures</div>
+        <div class="pitem"><div><div class="pname">Pap smear (Papanicolaou test)</div><div class="pdef">Cervical cell sampling; screens for cervical dysplasia and cancer; combined with HPV co-test; performed during pelvic exam</div></div></div>
+        <div class="pitem"><div><div class="pname">Colposcopy (colp/o + -scopy)</div><div class="pdef">Magnified visual exam of vagina and cervix after abnormal Pap; allows targeted biopsy of suspicious areas</div></div></div>
+        <div class="pitem"><div><div class="pname">Hysterosalpingography (HSG)</div><div class="pdef">hyster/o + salping/o + -graphy; X-ray with contrast dye through uterus/tubes; infertility workup for tubal patency</div></div></div>
+        <div class="pitem"><div><div class="pname">Culdocentesis (culd/o + -centesis)</div><div class="pdef">Needle aspiration of fluid from rectouterine pouch; diagnoses ectopic pregnancy rupture, PID</div></div></div>
+        <div class="pitem"><div><div class="pname">Amniocentesis (amni/o + -centesis)</div><div class="pdef">Aspiration of amniotic fluid; genetic testing for chromosomal abnormalities at 15–20 weeks</div></div></div>
+        <div class="pitem"><div><div class="pname">Mammography (mamm/o + -graphy)</div><div class="pdef">Breast X-ray; primary cancer screening tool; detects tumors before palpable</div></div></div>
+        <div class="pitem"><div><div class="pname">AFP test</div><div class="pdef">Alpha-fetoprotein; maternal serum screening for neural tube defects and chromosomal abnormalities</div></div></div>
+        <div class="pitem"><div><div class="pname">Pelvic ultrasound</div><div class="pdef">Imaging of uterus, ovaries, pregnancy; transvaginal (TV) for better resolution; no radiation; monitors fetal development</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--coral)">Therapeutic Procedures</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--gray-400);margin-bottom:6px">Uterus &amp; tubes</div>
+        <div class="pitem"><div><div class="pname">Hysterectomy (hyster/o + -ectomy)</div><div class="pdef">Surgical removal of uterus; for fibroids, cancer, prolapse; total = uterus + cervix; radical = + parametrium</div></div></div>
+        <div class="pitem"><div><div class="pname">Hysteropexy (hyster/o + -pexy)</div><div class="pdef">Surgical fixation of a prolapsed uterus; treats hysteroptosis</div></div></div>
+        <div class="pitem"><div><div class="pname">Tubal ligation</div><div class="pdef">Permanent female sterilization; fallopian tubes cut, tied, burned, or clipped to prevent fertilization</div></div></div>
+        <div class="pitem"><div><div class="pname">Salpingolysis (salping/o + -lysis)</div><div class="pdef">Breaking down/releasing fallopian tube adhesions; treats PID scarring and infertility</div></div></div>
+        <div class="pitem"><div><div class="pname">UAE — Uterine artery embolization</div><div class="pdef">Minimally invasive; blocks blood supply to uterine fibroids → shrinkage; uterus-sparing alternative to hysterectomy</div></div></div>
+        <div class="pitem"><div><div class="pname">Episiotomy (episi/o + -tomy)</div><div class="pdef">Incision of perineum to enlarge vaginal opening during delivery; prevents uncontrolled tearing</div></div></div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--gray-400);margin:10px 0 6px">Ovaries</div>
+        <div class="pitem"><div><div class="pname">Oophorectomy (oophor/o + -ectomy)</div><div class="pdef">Surgical removal of an ovary; bilateral = surgical menopause; for cancer, large cysts</div></div></div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--gray-400);margin:10px 0 6px">Breast</div>
+        <div class="pitem"><div><div class="pname">Mastopexy (mast/o + -pexy)</div><div class="pdef">Surgical breast lift/fixation</div></div></div>
+        <div class="pitem"><div><div class="pname">Mastectomy (mast/o + -ectomy)</div><div class="pdef">Surgical removal of breast; for cancer; radical = breast + lymph nodes + pectoral muscles</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VOCAB ===== -->
+  <div class="section" id="sec-vocab">
+    <div class="sub-tabs" id="vocab-tabs">
+      <button class="sub-tab active" onclick="showVocab('combining',this)">Combining forms</button>
+      <button class="sub-tab" onclick="showVocab('prefixes',this)">Prefixes</button>
+      <button class="sub-tab" onclick="showVocab('suffixes',this)">Suffixes</button>
+      <button class="sub-tab" onclick="showVocab('decode',this)">Term decoding</button>
+    </div>
+    <div class="card">
+      <div class="vpanel active" id="vt-combining">
+        <table class="vtable"><thead><tr><th>Combining form</th><th>Meaning</th><th>Example</th></tr></thead><tbody>
+          <tr><td><code>amni/o</code></td><td>amnion (inner fetal membrane)</td><td>amniocentesis, oligohydramnios</td></tr>
+          <tr><td><code>cervic/o</code></td><td>cervix (neck of uterus)</td><td>cervicitis, cervical dysplasia</td></tr>
+          <tr><td><code>chori/o</code></td><td>chorion (outer fetal membrane)</td><td>choriocarcinoma</td></tr>
+          <tr><td><code>colp/o</code></td><td>vagina</td><td>colposcopy, colporrhaphy</td></tr>
+          <tr><td><code>culd/o</code></td><td>rectouterine pouch (cul-de-sac)</td><td>culdocentesis, culdoscopy</td></tr>
+          <tr><td><code>endometri/o</code></td><td>endometrium</td><td>endometriosis, endometritis</td></tr>
+          <tr><td><code>episi/o</code></td><td>vulva, perineum</td><td>episiotomy, episiorraphy</td></tr>
+          <tr><td><code>gynec/o</code></td><td>female, woman</td><td>gynecologist, gynecology</td></tr>
+          <tr><td><code>hyster/o</code></td><td>uterus</td><td>hysterectomy, hysteropexy, hysteroptosis</td></tr>
+          <tr><td><code>mamm/o</code></td><td>breast</td><td>mammography, mammoplasty</td></tr>
+          <tr><td><code>mast/o</code></td><td>breast</td><td>mastectomy, mastopexy, mastitis</td></tr>
+          <tr><td><code>men/o</code></td><td>menstruation</td><td>menorrhagia, amenorrhea, dysmenorrhea</td></tr>
+          <tr><td><code>metr/o, metri/o</code></td><td>uterus</td><td>metrorrhagia, endometriosis</td></tr>
+          <tr><td><code>nat/o</code></td><td>birth</td><td>neonatal, antenatal, postnatal</td></tr>
+          <tr><td><code>olig/o</code></td><td>few, scanty</td><td>oligohydramnios</td></tr>
+          <tr><td><code>oophor/o</code></td><td>ovary</td><td>oophorectomy, oophoritis</td></tr>
+          <tr><td><code>ov/o, ovul/o</code></td><td>ovum, egg</td><td>ovulation, anovulation</td></tr>
+          <tr><td><code>part/o</code></td><td>birth, labor</td><td>parturition, postpartum</td></tr>
+          <tr><td><code>puerper/o</code></td><td>puerperium (postpartum period)</td><td>puerperal, puerperium</td></tr>
+          <tr><td><code>salping/o</code></td><td>fallopian tube</td><td>salpingitis, salpingolysis, HSG</td></tr>
+          <tr><td><code>thel/e</code></td><td>nipple</td><td>theleplasty, thelarche</td></tr>
+          <tr><td><code>vagin/o</code></td><td>vagina</td><td>vaginitis, vulvovaginitis</td></tr>
+          <tr><td><code>vulv/o</code></td><td>vulva</td><td>vulvovaginitis, vulvectomy</td></tr>
+        </tbody></table>
+      </div>
+      <div class="vpanel" id="vt-prefixes">
+        <table class="vtable"><thead><tr><th>Prefix</th><th>Meaning</th><th>Example</th></tr></thead><tbody>
+          <tr><td><code>an-</code></td><td>without, absence</td><td>amenorrhea (no menstruation), anovulation</td></tr>
+          <tr><td><code>dys-</code></td><td>difficult, painful, abnormal</td><td>dysmenorrhea (painful menses), dystocia</td></tr>
+          <tr><td><code>multi-</code></td><td>many</td><td>multigravida (many pregnancies)</td></tr>
+          <tr><td><code>nulli-</code></td><td>none</td><td>nullipara (never delivered)</td></tr>
+          <tr><td><code>poly-</code></td><td>many, much</td><td>polycystic ovary syndrome (PCOS)</td></tr>
+          <tr><td><code>pre-</code></td><td>before</td><td>preeclampsia, prenatal</td></tr>
+          <tr><td><code>primi-</code></td><td>first</td><td>primigravida (first pregnancy), primipara</td></tr>
+        </tbody></table>
+      </div>
+      <div class="vpanel" id="vt-suffixes">
+        <table class="vtable"><thead><tr><th>Suffix</th><th>Meaning</th><th>Example</th></tr></thead><tbody>
+          <tr><td><code>-centesis</code></td><td>surgical puncture/aspiration</td><td>amniocentesis, culdocentesis</td></tr>
+          <tr><td><code>-graphy</code></td><td>process of recording/imaging</td><td>mammography, HSG</td></tr>
+          <tr><td><code>-gravida</code></td><td>pregnant woman</td><td>multigravida, primigravida</td></tr>
+          <tr><td><code>-lysis</code></td><td>breakdown, destruction</td><td>salpingolysis (tube adhesion lysis)</td></tr>
+          <tr><td><code>-para</code></td><td>woman who has given birth</td><td>nullipara, primipara, multipara</td></tr>
+          <tr><td><code>-pexy</code></td><td>surgical fixation</td><td>hysteropexy, mastopexy</td></tr>
+          <tr><td><code>-plasia</code></td><td>formation, growth</td><td>cervical dysplasia, hyperplasia</td></tr>
+          <tr><td><code>-ptosis</code></td><td>drooping, prolapse</td><td>hysteroptosis (uterine prolapse)</td></tr>
+          <tr><td><code>-rrhagia</code></td><td>excessive bleeding/flow</td><td>menorrhagia, metrorrhagia</td></tr>
+          <tr><td><code>-rrhea</code></td><td>flow, discharge</td><td>amenorrhea, dysmenorrhea</td></tr>
+          <tr><td><code>-scopy</code></td><td>visual examination</td><td>colposcopy</td></tr>
+          <tr><td><code>-tocia</code></td><td>labor, birth condition</td><td>dystocia (difficult labor)</td></tr>
+          <tr><td><code>-tomy</code></td><td>incision into</td><td>episiotomy, hysterotomy</td></tr>
+        </tbody></table>
+      </div>
+      <div class="vpanel" id="vt-decode">
+        <table class="vtable"><thead><tr><th>Term</th><th>Word parts</th><th>Definition</th></tr></thead><tbody>
+          <tr><td>Amenorrhea</td><td>a- + men/o + -rrhea</td><td>Absence of menstruation</td></tr>
+          <tr><td>Amniocentesis</td><td>amni/o + -centesis</td><td>Aspiration of amniotic fluid for testing</td></tr>
+          <tr><td>Anovulation</td><td>an- + ovulation</td><td>Failure to release an ovum</td></tr>
+          <tr><td>Choriocarcinoma</td><td>chori/o + carcin/o + -oma</td><td>Malignant tumor from chorionic tissue</td></tr>
+          <tr><td>Colposcopy</td><td>colp/o + -scopy</td><td>Visual exam of vagina and cervix</td></tr>
+          <tr><td>Culdocentesis</td><td>culd/o + -centesis</td><td>Aspiration from rectouterine pouch</td></tr>
+          <tr><td>Dysmenorrhea</td><td>dys- + men/o + -rrhea</td><td>Painful menstruation</td></tr>
+          <tr><td>Endometriosis</td><td>endometri/o + -osis</td><td>Endometrial tissue outside the uterus</td></tr>
+          <tr><td>Episiotomy</td><td>episi/o + -tomy</td><td>Incision of the perineum during delivery</td></tr>
+          <tr><td>Hysteropexy</td><td>hyster/o + -pexy</td><td>Surgical fixation of the uterus</td></tr>
+          <tr><td>Hysteroptosis</td><td>hyster/o + -ptosis</td><td>Prolapse/drooping of the uterus</td></tr>
+          <tr><td>Hysterosalpingography</td><td>hyster/o + salping/o + -graphy</td><td>X-ray imaging of uterus and fallopian tubes</td></tr>
+          <tr><td>Mammography</td><td>mamm/o + -graphy</td><td>X-ray imaging of the breast</td></tr>
+          <tr><td>Mastopexy</td><td>mast/o + -pexy</td><td>Surgical fixation/lifting of the breast</td></tr>
+          <tr><td>Menorrhagia</td><td>men/o + -rrhagia</td><td>Abnormally heavy menstrual bleeding</td></tr>
+          <tr><td>Metrorrhagia</td><td>metr/o + -rrhagia</td><td>Irregular uterine bleeding between periods</td></tr>
+          <tr><td>Multigravida</td><td>multi- + -gravida</td><td>Woman who has been pregnant multiple times</td></tr>
+          <tr><td>Nullipara</td><td>nulli- + -para</td><td>Woman who has never delivered</td></tr>
+          <tr><td>Oophorectomy</td><td>oophor/o + -ectomy</td><td>Surgical removal of an ovary</td></tr>
+          <tr><td>Salpingitis</td><td>salping/o + -itis</td><td>Inflammation of the fallopian tube</td></tr>
+          <tr><td>Salpingolysis</td><td>salping/o + -lysis</td><td>Breaking down of fallopian tube adhesions</td></tr>
+          <tr><td>Theleplasty</td><td>thel/e + -plasty</td><td>Surgical repair/reconstruction of the nipple</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FLASHCARDS ===== -->
+  <div class="section" id="sec-flashcards">
+    <button class="fc-shuffle" onclick="shuffleCards()">⇄ Shuffle cards</button>
+    <div class="fc-nav">
+      <button class="fc-btn" onclick="prevCard()">&#8592;</button>
+      <div class="fc-counter" id="fc-counter">1 / 26</div>
+      <button class="fc-btn" onclick="nextCard()">&#8594;</button>
+    </div>
+    <div class="flip-wrap" onclick="flipCard()">
+      <div class="flip-inner" id="fc-inner">
+        <div class="flip-front"><div class="flip-term" id="fc-term">oophor/o</div><div class="flip-hint">click to reveal</div></div>
+        <div class="flip-back"><div class="flip-def" id="fc-def">ovary</div><div class="flip-ex" id="fc-ex">oophorectomy, oophoritis</div></div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--gray-400);text-align:center;margin-top:10px">Click to flip · Arrows to navigate</div>
+  </div>
+
+  <!-- ===== QUIZ ===== -->
+  <div class="section" id="sec-quiz">
+    <div class="card" id="quiz-card">
+      <div class="quiz-progress" id="quiz-dots"></div>
+      <div class="quiz-q-text" id="quiz-q"></div>
+      <div class="quiz-opts" id="quiz-opts"></div>
+      <div id="quiz-fb" style="display:none"></div>
+      <button class="quiz-next" id="quiz-next" onclick="nextQ()" style="display:none">Next question →</button>
+    </div>
+  </div>
+
+</div>
+<script>
+const SECS=['overview','anatomy','cycle','obstetrics','pathology','procedures','vocab','flashcards','quiz'];
+const visited=new Set(['overview']);
+function showSec(id,btn){
+  SECS.forEach(s=>document.getElementById('sec-'+s).classList.remove('active'));
+  document.querySelectorAll('.nav-row .tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active'); btn.classList.add('active');
+  visited.add(id);
+  const pct=Math.round((visited.size/SECS.length)*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-label').textContent=pct+'%';
+  if(id==='flashcards') renderCard();
+  if(id==='quiz'&&!quizStarted) startQuiz();
+}
+function showPath(id,btn){
+  document.querySelectorAll('[id^="pp-"]').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('#path-tabs .sub-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('pp-'+id).classList.add('active'); btn.classList.add('active');
+}
+function showVocab(id,btn){
+  document.querySelectorAll('[id^="vt-"]').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('#vocab-tabs .sub-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('vt-'+id).classList.add('active'); btn.classList.add('active');
+}
+let allCards=[
+  {term:'oophor/o',def:'ovary',ex:'oophorectomy, oophoritis'},
+  {term:'salping/o',def:'fallopian tube',ex:'salpingitis, salpingolysis, HSG'},
+  {term:'hyster/o',def:'uterus',ex:'hysterectomy, hysteropexy, hysteroptosis'},
+  {term:'metr/o, metri/o',def:'uterus',ex:'metrorrhagia, endometriosis'},
+  {term:'cervic/o',def:'cervix',ex:'cervicitis, cervical dysplasia'},
+  {term:'vagin/o, colp/o',def:'vagina',ex:'vaginitis, colposcopy'},
+  {term:'vulv/o',def:'vulva',ex:'vulvovaginitis'},
+  {term:'episi/o',def:'vulva, perineum',ex:'episiotomy'},
+  {term:'endometri/o',def:'endometrium',ex:'endometriosis, endometritis'},
+  {term:'amni/o',def:'amnion (inner fetal membrane)',ex:'amniocentesis'},
+  {term:'chori/o',def:'chorion (outer fetal membrane)',ex:'choriocarcinoma'},
+  {term:'mamm/o, mast/o',def:'breast',ex:'mammography, mastectomy'},
+  {term:'men/o',def:'menstruation',ex:'menorrhagia, amenorrhea'},
+  {term:'nat/o',def:'birth',ex:'neonatal, antenatal'},
+  {term:'thel/e',def:'nipple',ex:'theleplasty, thelarche'},
+  {term:'culd/o',def:'rectouterine pouch (cul-de-sac)',ex:'culdocentesis'},
+  {term:'-gravida',def:'pregnant woman',ex:'multigravida, primigravida'},
+  {term:'-para',def:'woman who has given birth',ex:'nullipara, primipara'},
+  {term:'-rrhagia',def:'excessive bleeding/flow',ex:'menorrhagia, metrorrhagia'},
+  {term:'-tocia',def:'labor, birth condition',ex:'dystocia (difficult labor)'},
+  {term:'-pexy',def:'surgical fixation',ex:'hysteropexy, mastopexy'},
+  {term:'-ptosis',def:'drooping, prolapse',ex:'hysteroptosis'},
+  {term:'nulli-',def:'none',ex:'nullipara (never delivered)'},
+  {term:'primi-',def:'first',ex:'primigravida (first pregnancy)'},
+  {term:'dys-',def:'difficult, painful, abnormal',ex:'dysmenorrhea, dystocia'},
+  {term:'an-',def:'without, absence',ex:'amenorrhea, anovulation'},
+];
+let fcIdx=0,fcFlipped=false;
+function renderCard(){
+  const c=allCards[fcIdx];
+  document.getElementById('fc-term').textContent=c.term;
+  document.getElementById('fc-def').textContent=c.def;
+  document.getElementById('fc-ex').textContent=c.ex;
+  document.getElementById('fc-counter').textContent=(fcIdx+1)+' / '+allCards.length;
+  document.getElementById('fc-inner').classList.remove('flipped'); fcFlipped=false;
+}
+function flipCard(){ fcFlipped=!fcFlipped; document.getElementById('fc-inner').classList.toggle('flipped',fcFlipped); }
+function nextCard(){ fcIdx=(fcIdx+1)%allCards.length; renderCard(); }
+function prevCard(){ fcIdx=(fcIdx-1+allCards.length)%allCards.length; renderCard(); }
+function shuffleCards(){
+  for(let i=allCards.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [allCards[i],allCards[j]]=[allCards[j],allCards[i]]; }
+  fcIdx=0; renderCard();
+}
+const QUIZ=[
+  {q:'What does salping/o mean?',ans:'Fallopian tube',opts:['Ovary','Fallopian tube','Uterus','Cervix']},
+  {q:'Amenorrhea (a- + men/o + -rrhea) means:',ans:'Absence of menstruation',opts:['Painful menstruation','Heavy menstruation','Absence of menstruation','Irregular bleeding between periods']},
+  {q:'Nullipara (nulli- + -para) refers to:',ans:'A woman who has never delivered',opts:['A woman pregnant for the first time','A woman who has never delivered','A woman with many pregnancies','A woman who has delivered once']},
+  {q:'Endometriosis involves:',ans:'Endometrial tissue growing outside the uterus',opts:['Endometrial cancer','Inflammation of the endometrium','Endometrial tissue growing outside the uterus','Thickening of the endometrium']},
+  {q:'Amniocentesis (amni/o + -centesis) is:',ans:'Aspiration of amniotic fluid for genetic testing',opts:['Imaging of the amnion','Aspiration of amniotic fluid for genetic testing','Repair of the amnion','Incision into the amnion']},
+  {q:'Menorrhagia (men/o + -rrhagia) means:',ans:'Abnormally heavy or prolonged menstrual bleeding',opts:['Absence of menstruation','Painful menstruation','Abnormally heavy or prolonged menstrual bleeding','Irregular bleeding between periods']},
+  {q:'Episiotomy (episi/o + -tomy) is:',ans:'Incision of the perineum to enlarge vaginal opening during delivery',opts:['Removal of the vulva','Incision of the perineum to enlarge vaginal opening during delivery','Repair of the vagina','Fixation of the perineum']},
+  {q:'Oophorectomy (oophor/o + -ectomy) means:',ans:'Surgical removal of an ovary',opts:['Surgical repair of an ovary','Surgical removal of an ovary','Surgical fixation of an ovary','Surgical examination of an ovary']},
+  {q:'Hysterosalpingography (HSG) is used to:',ans:'Image the uterus and fallopian tubes for patency/infertility workup',opts:['Remove the uterus','Image the uterus and fallopian tubes for patency/infertility workup','Fix a prolapsed uterus','Examine the cervix with a scope']},
+  {q:'The corpus luteum forms after:',ans:'Ovulation — secretes progesterone to maintain endometrium',opts:['Menstruation','Fertilization','Ovulation — secretes progesterone to maintain endometrium','Implantation']},
+  {q:'Colposcopy (colp/o + -scopy) is performed:',ans:'After an abnormal Pap smear to examine cervix/vagina',opts:['To image breast tissue','After an abnormal Pap smear to examine cervix/vagina','To aspirate amniotic fluid','To visualize the ovaries']},
+  {q:'The suffix -tocia relates to:',ans:'Labor / birth condition',opts:['Pregnancy count','Labor / birth condition','Surgical fixation','Excessive bleeding']},
+];
+let qIdx=0,score=0,results=[],quizStarted=false;
+function startQuiz(){ quizStarted=true; qIdx=0; score=0; results=[]; renderQ(); }
+function renderQ(){
+  const q=QUIZ[qIdx];
+  document.getElementById('quiz-dots').innerHTML=QUIZ.map((_,i)=>`<div class="q-dot ${i<results.length?(results[i]?'pass':'fail'):''}" title="Q${i+1}"></div>`).join('');
+  document.getElementById('quiz-q').textContent=(qIdx+1)+'. '+q.q;
+  document.getElementById('quiz-opts').innerHTML=q.opts.map(o=>`<button class="q-opt" onclick="checkAns(this,'${o.replace(/'/g,"\\'")}','${q.ans.replace(/'/g,"\\'")}')">${o}</button>`).join('');
+  const fb=document.getElementById('quiz-fb'); fb.style.display='none'; fb.className='q-fb';
+  document.getElementById('quiz-next').style.display='none';
+}
+function checkAns(btn,chosen,correct){
+  document.querySelectorAll('.q-opt').forEach(b=>{ b.disabled=true; if(b.textContent===correct) b.classList.add('correct'); });
+  const ok=chosen===correct;
+  if(ok){ score++; btn.classList.add('correct'); } else btn.classList.add('wrong');
+  results.push(ok);
+  document.getElementById('quiz-dots').innerHTML=QUIZ.map((_,i)=>`<div class="q-dot ${i<results.length?(results[i]?'pass':'fail'):''}" title="Q${i+1}"></div>`).join('');
+  const fb=document.getElementById('quiz-fb');
+  fb.style.display='block'; fb.className='q-fb '+(ok?'correct':'wrong');
+  fb.textContent=ok?'✓ Correct!':`✗ Correct answer: ${correct}`;
+  const nxt=document.getElementById('quiz-next');
+  nxt.style.display='inline-block';
+  nxt.textContent=qIdx===QUIZ.length-1?'See results':'Next question →';
+}
+function nextQ(){
+  qIdx++; if(qIdx>=QUIZ.length){ showScore(); return; } renderQ();
+}
+function showScore(){
+  const pct=Math.round((score/QUIZ.length)*100);
+  const cls=pct>=80?'great':pct>=60?'ok':'retry';
+  const msg=pct>=90?'Outstanding! Chapter 8 mastered.':pct>=70?'Good work! Review a few terms.':'Keep studying — check the pathology and vocab tabs.';
+  document.getElementById('quiz-card').innerHTML=`<div class="score-wrap"><div class="score-big ${cls}">${score}/${QUIZ.length}</div><div style="font-size:13px;color:var(--gray-400);margin-top:4px">${pct}%</div><div class="score-msg">${msg}</div><button class="retry-btn" onclick="retakeQuiz()">Retake quiz</button></div>`;
+}
+function retakeQuiz(){
+  document.getElementById('quiz-card').innerHTML=`<div class="quiz-progress" id="quiz-dots"></div><div class="quiz-q-text" id="quiz-q"></div><div class="quiz-opts" id="quiz-opts"></div><div id="quiz-fb" style="display:none"></div><button class="quiz-next" id="quiz-next" onclick="nextQ()" style="display:none">Next question →</button>`;
+  qIdx=0; score=0; results=[]; renderQ();
+}
+</script>
+</body>
+</html>
